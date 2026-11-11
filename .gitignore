@@ -1,0 +1,20 @@
+# Generated reports only
+/reports/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Personal settings
+/core/settings.json
+
+# SQLMap (external tool)
+sqlmap/
+
+# WhatWeb (external tool)
+WhatWeb/
+
+# OS
+.DS_Store
+Thumbs.db
