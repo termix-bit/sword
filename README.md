@@ -1,25 +1,48 @@
-<div align="center">
-
 # ⚔️ Sword
-
 ### Modular Security Toolkit for Termux
 
-[![Python](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Platform](https://img.shields.io/badge/Platform-Termux%20%7C%20Android-000000?logo=android&logoColor=white)](https://termux.dev/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/Status-Beta-orange.svg)](#beta-status)
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white" alt="Python" />
+  <img src="https://img.shields.io/badge/Platform-Termux%20%7C%20Android-000000?logo=android&logoColor=white" alt="Platform" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" />
+  <img src="https://img.shields.io/badge/Status-Beta-orange.svg" alt="Status" />
+</p>
 
-**Sword** is a modular, menu-driven security toolkit for **Termux on Android**. Written in Python and using [Rich](https://github.com/Textualize/rich) for its terminal interface, Sword brings network utilities, web assessment helpers, OSINT lookups, wireless information, basic cryptography demonstrations, forensics commands, custom Python scripts, and report management into one interface.
+**Sword** is an open-source, modular, menu-driven security toolkit for **Termux on Android**.
 
-[Features](#features) · [Requirements](#requirements) · [Installation](#installation) · [Usage](#usage) · [Security](#security--legal-use) · [Screenshots](#screenshots)
+Written in Python and using [Rich](https://github.com/Textualize/rich) for its terminal interface, Sword brings network utilities, web assessment helpers, OSINT lookups, wireless information, cryptography demonstrations, forensics commands, custom Python scripts, and report management into one interface.
 
-</div>
+Sword is designed to provide a modular environment for security learning, defensive diagnostics, and authorized security assessments.
+
+---
+
+## Sword Product Family
+
+Sword is evolving into a family of independent security projects, each designed for its own platform and use case.
+
+| Project | Platform | Description | Status |
+|---|---|---|---|
+| **Sword Termux** | Android / Termux | Modular Python-based terminal security framework | Beta |
+| [Sword Android](https://github.com/termix-bit/sword-android) | Android 8.0+ | Standalone native Android security toolkit | v1.0.0 Released |
+| Sword Linux | Linux | Dedicated Linux security suite | In development |
+
+### Sword Android — First Official Release
+
+The first official release of Sword Android is available.
+
+Unlike the Termux edition, Sword Android is a standalone native application built with Kotlin, Jetpack Compose, and an embedded Python runtime.
+
+It does not require Termux or a separately installed Python environment.
+
+**[Download Sword Android v1.0.0](https://github.com/termix-bit/sword-android/releases/latest)**
+
+**[View Sword Android Source Code](https://github.com/termix-bit/sword-android)**
 
 ---
 
 ## Features
 
-Sword is organized into nine modules. Some external tools are installed by `install.sh`; others are optional and must be installed separately. Check [External tools](#external-tools) before using a feature.
+Sword is organized into nine modules. Some external tools are installed by `install.sh`; others are optional and must be installed separately.
 
 | Module | Features | Tools / dependencies |
 |---|---|---|
@@ -33,9 +56,9 @@ Sword is organized into nine modules. Some external tools are installed by `inst
 | **Reports** | Save command output as JSON, view reports, generate HTML reports for a browser, delete individual or all reports | Python; local loopback HTTP server |
 | **Settings** | Language and animation preferences, proxy environment settings, update check, reset, and preset workflows | Git and configured command-line tools |
 
-`*` Optional tools that are not installed by the current installer and may require manual installation. See [External tools](#external-tools).
+`*` Optional tools that are not installed by the current installer and may require manual installation. See [External Tools](#external-tools).
 
-### Settings presets
+### Settings Presets
 
 The Settings module includes the following preset workflows:
 
@@ -45,7 +68,7 @@ The Settings module includes the following preset workflows:
 - **Specific Wi-Fi Scan** — lists nearby Wi-Fi networks and records information about a selected network.
 - **Scan All Nearby Devices** — attempts to determine the connected Wi-Fi subnet and runs an Nmap service scan.
 
-> **Wireless feature status:** Nearby Wi-Fi scanning, connection information, and local-network discovery are implemented. The **Monitor Mode** and **Deauth Attack** menu entries currently display prerequisite warnings only; those capabilities are **not implemented** in this Beta release.
+> **Wireless feature status:** Nearby Wi-Fi scanning, connection information, and local-network discovery are implemented. The Monitor Mode and Deauth Attack menu entries currently display prerequisite warnings only; those capabilities are not implemented in this Beta release.
 
 ---
 
@@ -64,7 +87,7 @@ For Wi-Fi scanning, Android may require Location permission for Termux:API and L
 
 ## Installation
 
-Open Termux and run the following commands:
+Open Termux and run:
 
 ```bash
 # Update Termux packages and install Git
@@ -72,111 +95,146 @@ pkg update -y && pkg upgrade -y
 pkg install -y git
 
 # Clone Sword
-# This URL requires repository access while the GitHub repository is private.
 git clone https://github.com/termix-bit/sword.git
 cd sword
 
-# Install Python dependencies and the tools configured by the installer
+# Install Python dependencies and configured tools
 bash install.sh
 
-# Check the installed Python version (Sword targets Python 3.14+)
+# Check the installed Python version
 python --version
 
 # Launch Sword
 python main.py
 ```
 
-If the repository is private, GitHub authentication must be configured for an account that has access. After the repository is made public, the same clone URL can be used without repository membership.
-
-The installer uses `pkg` to install base packages, installs Python dependencies from `requirements.txt`, clones SQLMap, installs FFUF through Go, and attempts to configure WhatWeb. Review `install.sh` before running it: it updates packages and downloads third-party software from upstream repositories.
-
-### Python dependencies
+### Python Dependencies
 
 The current `requirements.txt` contains:
 
 - `rich` — terminal interface, styling, and menus.
 - `aiohttp` — asynchronous HTTP client used by the auxiliary username-scanner helper.
 
+### Installer Notes
+
+The installer uses `pkg` to install base packages, installs Python dependencies from `requirements.txt`, clones SQLMap, installs FFUF through Go, and attempts to configure WhatWeb.
+
+Review `install.sh` before running it. It updates packages and downloads third-party software from upstream repositories.
+
 ---
 
-## External tools
+## External Tools
 
-The installer does **not** install every command referenced by every module. The following table reflects the current `install.sh` and the commands used by the project.
+The installer does not install every command referenced by every module.
 
 | Tool / command | Used by | Installation status |
 |---|---|---|
-| Python, Git | Core / Settings | Installed through `pkg` by `install.sh` |
-| Nmap, WHOIS, DNS utilities, cURL, Wget | Network, Web, OSINT | Installed through `pkg` by `install.sh` |
-| Go, Rust, binutils, build dependencies | FFUF / tool setup | Installed through `pkg` by `install.sh` |
-| Termux API command package | Wireless | Installed through `pkg`; the separate Android Termux:API app must also be installed manually |
-| SQLMap | Web | Cloned by `install.sh` into `$HOME/sqlmap` |
-| FFUF | Web | Installed by `install.sh` using Go |
-| WhatWeb | Web | Cloned and configured by `install.sh`; Ruby and Bundler are installed as part of that setup when needed |
+| Python, Git | Core / Settings | Installed through `pkg` |
+| Nmap, WHOIS, DNS utilities, cURL, Wget | Network, Web, OSINT | Installed through `pkg` |
+| Go, Rust, binutils, build dependencies | FFUF / tool setup | Installed through `pkg` |
+| Termux API command package | Wireless | Installed through `pkg`; separate Android app required |
+| SQLMap | Web | Cloned by installer into `$HOME/sqlmap` |
+| FFUF | Web | Installed by installer using Go |
+| WhatWeb | Web | Cloned and configured by installer |
 | RustScan | Network | Manual installation required |
 | Maigret | OSINT | Manual installation required |
 | hping3 | Network | Manual installation required; raw-packet operations may require root |
 | ExifTool | Forensics | Manual installation required |
-| `file`, `ping`, `traceroute`, `xxd` | Forensics / Network | Check availability on your Termux installation and install separately if missing |
+| `file`, `ping`, `traceroute`, `xxd` | Forensics / Network | Check availability and install separately if missing |
 | `strings` | Forensics | Normally provided by the installed `binutils` package |
 
-After installing an optional tool, verify that its executable is available in Termux's `PATH`. Sword invokes several tools by command name, so an executable installed outside `PATH` may not be detected.
+After installing an optional tool, verify that its executable is available in Termux's `PATH`.
+
+Sword invokes several tools by command name, so an executable installed outside `PATH` may not be detected.
 
 ---
 
 ## Usage
 
-1. Start Sword with `python main.py`.
+1. Start Sword:
+
+```bash
+python main.py
+```
+
 2. Choose a module from the main menu.
 3. Enter the target, URL, username, network, or file path requested by that module.
-4. Review the command output and any error messages.
+4. Review command output and error messages.
 5. Open **Reports** to view saved JSON reports, generate an HTML view, or delete reports.
 
-Only test systems and networks that you own or are explicitly authorized to assess. Read [Security & Legal Use](#security--legal-use) before running scans.
+Only test systems and networks that you own or are explicitly authorized to assess.
 
-### Custom Python scripts
+### Custom Python Scripts
 
 Sword can discover Python scripts placed in the project-level `custom_scripts/` directory.
 
-1. Create the directory if it does not already exist:
+Create the directory:
 
-   ```bash
-   mkdir -p custom_scripts
-   ```
+```bash
+mkdir -p custom_scripts
+```
 
-2. Copy a Python script that you wrote or reviewed into it. For example:
+Copy a Python script that you wrote or reviewed:
 
-   ```bash
-   cp ~/my_tool.py custom_scripts/
-   ```
+```bash
+cp ~/my_tool.py custom_scripts/
+```
 
-3. Start Sword with `python main.py`.
-4. Open **Custom Tools**, select the script, and run it.
+Start Sword:
 
-> **Plugin security:** Custom scripts execute as separate Python processes with the same Android/Termux user permissions as Sword. A plugin can access files available to that user and can launch other processes. Only run scripts you trust. The current plugin execution timeout is 120 seconds; this is not a security sandbox.
+```bash
+python main.py
+```
+
+Open **Custom Tools**, select the script, and run it.
+
+> **Plugin security:** Custom scripts execute as separate Python processes with the same Android/Termux user permissions as Sword. A plugin can access files available to that user and launch other processes. Only run scripts you trust. The current plugin execution timeout is 120 seconds; this is not a security sandbox.
 
 ### Reports
 
-Sword saves command output locally as JSON files in `reports/`. The Reports module can generate an HTML version and open it in the browser through a temporary local HTTP server bound to `127.0.0.1`, using a random port and access token. Reports can contain target addresses, commands, and scan output; treat them as sensitive and do not commit real scan reports to a public repository.
+Sword saves command output locally as JSON files in `reports/`.
+
+The Reports module can generate an HTML version and open it in the browser through a temporary local HTTP server bound to `127.0.0.1`, using a random port and access token.
+
+Reports may contain target addresses, commands, and scan output. Treat them as sensitive and do not commit real scan reports to a public repository.
 
 ---
 
 ## Security & Legal Use
 
-### Authorized testing only
+### Authorized Testing Only
 
-Sword is intended for education and authorized security testing. Use it only against devices, applications, accounts, and networks that you own or have explicit permission to test. Unauthorized scanning or access may violate laws, contracts, or service terms. You are responsible for obtaining permission and complying with applicable laws.
+Sword is intended for education and authorized security testing.
 
-### Root access
+Use it only against devices, applications, accounts, and networks that you own or have explicit permission to test.
 
-Many basic features can run without root. Some operations may require a rooted device or additional privileges, depending on the device and scan mode. Examples include **hping3 raw-packet operations**, **Nmap OS detection (`-O`)**, and certain full-port or packet-level operations. Features marked as root-required may fail on non-rooted devices or restricted Android builds.
+Unauthorized scanning or access may violate laws, contracts, or service terms. You are responsible for obtaining permission and complying with applicable laws.
+
+### Root Access
+
+Many basic features can run without root.
+
+Some operations may require a rooted device or additional privileges, depending on the device and scan mode.
+
+Examples include:
+
+- hping3 raw-packet operations.
+- Nmap OS detection (`-O`).
+- Certain full-port or packet-level operations.
+
+Features marked as root-required may fail on non-rooted devices or restricted Android builds.
 
 ### Proxy and VPN
 
-Some OSINT endpoints and external services may be unreachable on restricted or filtered networks. Sword provides proxy environment settings under **Settings → Set Proxy/VPN**, and a device-level VPN can also be used.
+Some OSINT endpoints and external services may be unreachable on restricted or filtered networks.
 
-Proxy behavior is tool-dependent. Sword sets common proxy environment variables, but not every command-line tool honors them. Do not assume that Nmap, Ping, DNS utilities, or every external program automatically routes traffic through the configured proxy. SOCKS support also depends on the individual tool.
+Sword provides proxy environment settings under **Settings → Set Proxy/VPN**, and a device-level VPN can also be used.
 
-### External services and privacy
+Proxy behavior is tool-dependent. Sword sets common proxy environment variables, but not every command-line tool honors them.
+
+Do not assume that Nmap, Ping, DNS utilities, or every external program automatically routes traffic through the configured proxy. SOCKS support also depends on the individual tool.
+
+### External Services and Privacy
 
 Some OSINT features contact third-party services:
 
@@ -184,15 +242,19 @@ Some OSINT features contact third-party services:
 - The email breach-check option opens the [Have I Been Pwned](https://haveibeenpwned.com/) account page in the device browser; it does not perform a local breach-database search.
 - The OSINT Profile preset also requests IP geolocation from ip-api.com. In the current source, this preset uses HTTP; the standalone OSINT IP Geolocation option uses HTTPS. Avoid sending sensitive lookup data over untrusted networks through the HTTP-based preset until that implementation is changed to HTTPS.
 
-Review the providers' terms and privacy policies before using these services. Do not submit information you are not authorized to share.
+Review providers' terms and privacy policies before using these services. Do not submit information you are not authorized to share.
 
-### Username-scanner helper
+### Username Scanner Helper
 
-The repository includes the WhatsMyName dataset at `tools/wmn-data.json` and an auxiliary asynchronous scanner in `tools/username_scanner.py`. This helper is not currently exposed as an option in the main Sword menu. Its results depend on network reachability, site behavior, and the dataset; results should be independently verified.
+The repository includes the WhatsMyName dataset at `tools/wmn-data.json` and an auxiliary asynchronous scanner in `tools/username_scanner.py`.
 
-### Cryptography disclaimer
+This helper is not currently exposed as an option in the main Sword menu.
 
-The Crypto module provides basic demonstrations and utility functions, not a secure data-protection system:
+Its results depend on network reachability, site behavior, and the dataset. Results should be independently verified.
+
+### Cryptography Disclaimer
+
+The Crypto module provides basic demonstrations and utility functions, not a secure data-protection system.
 
 - **Base64** and **ROT13** are encodings/obfuscation, not encryption.
 - **XOR with a simple key** is not suitable for protecting sensitive data.
@@ -202,38 +264,47 @@ Do not use these functions as a replacement for modern, authenticated cryptograp
 
 ---
 
-## Beta status
+## Project Status
 
-Sword is a **Beta** project and remains under active development. Some features depend on optional external tools that must be installed manually. Behavior can vary across Android versions, devices, Termux package versions, permissions, and upstream services. A menu entry does not guarantee that the required hardware, privileges, or external executable is available on every device.
+Sword is currently a **Beta** project and remains under active development.
+
+Some features depend on optional external tools that must be installed manually.
+
+Behavior can vary across Android versions, devices, Termux package versions, permissions, and upstream services.
+
+A menu entry does not guarantee that the required hardware, privileges, or external executable is available on every device.
 
 The project has not been validated on every Android device or Termux configuration. Back up important data and review commands before running them.
 
 ---
 
-## Project structure
+## Project Structure
 
 ```text
 sword/
-├── core/                      # Executor, paths, settings, UI, validators, report server
+├── core/
+│   ├── executor.py
+│   ├── paths.py
+│   └── ...
 ├── modules/
-│   ├── network/                # Network discovery and scanning
-│   ├── web/                    # Web assessment helpers
-│   ├── osint/                  # OSINT lookups
-│   ├── wireless/               # Wi-Fi information via Termux:API
-│   ├── crypto/                 # Hashing and encoding demonstrations
-│   ├── forensics/              # File and metadata utilities
-│   ├── custom/                 # Python plugin runner
-│   ├── reports/                # JSON and HTML report management
-│   └── settings/               # Preferences and preset workflows
-├── tools/                      # Auxiliary tools and WhatsMyName dataset
-├── custom_scripts/             # User-created Python plugins (create as needed)
-├── reports/                    # Generated reports (created at runtime)
-├── screenshots/                # Project screenshots
-├── main.py                     # Main entry point
-├── install.sh                  # Termux setup script
-├── requirements.txt            # Python dependencies
-├── THIRD_PARTY_NOTICES.md      # Third-party dataset notices
-├── LICENSE                     # MIT License
+│   ├── network/
+│   ├── web/
+│   ├── osint/
+│   ├── wireless/
+│   ├── crypto/
+│   ├── forensics/
+│   ├── custom/
+│   ├── reports/
+│   └── settings/
+├── tools/
+├── custom_scripts/
+├── reports/
+├── screenshots/
+├── main.py
+├── install.sh
+├── requirements.txt
+├── THIRD_PARTY_NOTICES.md
+├── LICENSE
 └── README.md
 ```
 
@@ -241,17 +312,19 @@ sword/
 
 ## Screenshots
 
-<div align="center">
+<p align="center">
   <img src="screenshots/Main_menu.jpg" width="32%" alt="Sword main menu" />
   <img src="screenshots/Settings.jpg" width="32%" alt="Sword settings menu" />
   <img src="screenshots/Html_report.jpg" width="32%" alt="Sword HTML report in browser" />
-</div>
+</p>
 
 ---
 
-## Credits & acknowledgements
+## Credits & Acknowledgements
 
-Sword builds on the work of open-source projects, tools, libraries, and services. Thanks to their maintainers and contributors:
+Sword builds on the work of open-source projects, tools, libraries, and services.
+
+Thanks to their maintainers and contributors:
 
 - [Rich](https://github.com/Textualize/rich) — terminal interface and formatting.
 - [aiohttp](https://github.com/aio-libs/aiohttp) — asynchronous HTTP client.
@@ -263,24 +336,46 @@ Sword builds on the work of open-source projects, tools, libraries, and services
 - [RustScan](https://github.com/RustScan/RustScan) — optional fast port scanner.
 - [WhatsMyName](https://github.com/WebBreacher/WhatsMyName) — username lookup dataset included at `tools/wmn-data.json`.
 
-### Third-party dataset license
+### Third-Party Dataset License
 
-The WhatsMyName dataset is distributed under the **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** license. This dataset has its own license; Sword's MIT license does not replace or override it. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) for attribution and redistribution requirements.
+The WhatsMyName dataset is distributed under the **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)** license.
+
+This dataset has its own license; Sword's MIT license does not replace or override it.
+
+See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) and the [CC BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/) for attribution and redistribution requirements.
 
 ---
 
 ## License
 
-Sword's original project code is released under the **MIT License**. See the [`LICENSE`](LICENSE) file. Third-party tools, libraries, and datasets remain subject to their own licenses and terms; see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
+Sword's original project code is released under the **MIT License**.
+
+See the [`LICENSE`](LICENSE) file.
+
+Third-party tools, libraries, and datasets remain subject to their own licenses and terms. See [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md).
 
 ---
 
 ## Contributing
 
-Bug reports, documentation improvements, and pull requests are welcome. Before submitting a large feature, consider opening an issue to discuss the proposal. When reporting a bug, include reproduction steps, Android/device details, Termux source, Python version, and relevant error output. Remove private targets, tokens, credentials, and personal information from logs before sharing them.
+Bug reports, documentation improvements, and pull requests are welcome.
 
-<div align="center">
+Before submitting a large feature, consider opening an issue to discuss the proposal.
 
-**Made with ❤️ for Termux**
+When reporting a bug, include:
 
-</div>
+- Reproduction steps.
+- Android/device details.
+- Termux source.
+- Python version.
+- Relevant error output.
+
+Remove private targets, tokens, credentials, and personal information from logs before sharing them.
+
+---
+
+<p align="center">
+  <strong>Made with ❤️ for Termux</strong>
+  <br />
+  <sub>Part of the Sword Security Project Family</sub>
+</p>
