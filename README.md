@@ -40,6 +40,21 @@ It does not require Termux or a separately installed Python environment.
 
 ---
 
+
+<div align="center">
+
+<a href="https://github.com/termix-bit/sword-android/releases/latest">
+  <img src="https://img.shields.io/badge/DOWNLOAD%20SWORD%20ANDROID-GET%20APK-7C3AED?style=for-the-badge&logo=android&logoColor=white&labelColor=171717" alt="Download Sword Android APK" />
+</a>
+
+**دانلود نسخه رسمی اندروید Sword**
+
+نسخه 1.0.0 · بدون نیاز به Termux · نصب مستقیم روی اندروید 8.0 و بالاتر
+
+</div>
+
+---
+
 ## Features
 
 Sword is organized into nine modules. Some external tools are installed by `install.sh`; others are optional and must be installed separately.
