@@ -2,7 +2,6 @@
 
 # ⚔️ Sword
 ### Modular Security Toolkit for Termux
-
 [![Python](https://img.shields.io/badge/Python-3.14%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Platform](https://img.shields.io/badge/Platform-Termux%20%7C%20Android-000000?logo=android&logoColor=white)](https://termux.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
